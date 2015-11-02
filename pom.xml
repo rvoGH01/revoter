@@ -5,12 +5,17 @@
 	<artifactId>revoter</artifactId>
 	<packaging>war</packaging>
 	<version>1.0.0</version>
-	<name>revoter Maven Webapp</name>
+	<name>Restaurant voter Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
 		<spring.version>4.1.6.RELEASE</spring.version>
+		<spring.jpa.version>1.9.0.RELEASE</spring.jpa.version>
+		<hibernate.version>4.3.8.Final</hibernate.version>
+		<hsqldb.version>2.3.2</hsqldb.version>
 		<junit.version>4.12</junit.version>
+		<java.version>1.8</java.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
 
@@ -30,7 +35,41 @@
 			<artifactId>spring-webmvc</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
+		<dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
 
+		<!-- Spring Data JPA dependencies -->
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-jpa</artifactId>
+			<version>${spring.jpa.version}</version>
+		</dependency>
+		
+		<!-- Hibernate -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>${hibernate.version}</version>
+		</dependency>
+		
+		<!-- HSQLDB -->
+		<dependency>
+			<groupId>org.hsqldb</groupId>
+			<artifactId>hsqldb</artifactId>
+			<version>${hsqldb.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+		
+		<!-- MySQL -->
+		<dependency>  
+   			<groupId>mysql</groupId>  
+   			<artifactId>mysql-connector-java</artifactId>  
+   			<version>5.1.6</version>  
+  		</dependency>
+		
 		<!-- Jackson JSON Processor -->
 		<dependency>
 		    <groupId>com.fasterxml.jackson.core</groupId>
@@ -47,5 +86,18 @@
 	</dependencies>
 	<build>
 		<finalName>revoter</finalName>
+		
+		<plugins>
+			<plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.2</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
+		</plugins>
 	</build>
 </project>

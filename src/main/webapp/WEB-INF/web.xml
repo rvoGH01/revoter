@@ -4,18 +4,20 @@
  
  	<!--
  	
+ 	Listener is commented due to 'dispatcherServlet' uses not standard context XML file e.g. 'dispatcherServlet-servlet.xml'.
+ 	To use below listener we should declare root context e.g. 'db-context.xml'.
+ 	
+ 	http://stackoverflow.com/questions/22350721/could-not-open-servletcontext-resource-web-inf-applicationcontext-xml 
+ 	-->
  	<listener>
     	<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   	</listener>
-  	-->
- 
- 	<!--
+  	
  	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>/WEB-INF/spring/db-context.xml</param-value>
 	</context-param>
-	-->
- 
+	
 	<servlet>
 	    <servlet-name>dispatcherServlet</servlet-name>
 	    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
