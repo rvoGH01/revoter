@@ -1,5 +1,6 @@
 package com.revoter.model;
 
+import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -16,9 +17,11 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="restaurant")
-public class Restaurant {
+public class Restaurant implements Serializable {
+	private static final long serialVersionUID = 6362819538857399093L;
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="restaurant_id")
 	private long id;
 	

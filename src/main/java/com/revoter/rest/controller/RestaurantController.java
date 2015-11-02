@@ -22,7 +22,7 @@ import com.revoter.rest.repository.RestaurantRepository;
 
 @RestController
 @RequestMapping("/restaurants")
-public class RestaurantService {
+public class RestaurantController {
 	
 	@Autowired
 	private RestaurantRepository restaurantRepository;
@@ -31,14 +31,13 @@ public class RestaurantService {
 	public ResponseEntity<Iterable<Restaurant>> getAllRestaurants() {
 		System.out.println("Get all available restaurants.");
 		Iterable<Restaurant> allRestaurants = restaurantRepository.findAll();
-		//return new ResponseEntity<>(allRestaurants /*restaurantRepository.findAll()*/, HttpStatus.OK);
-		return new ResponseEntity<>(restaurantRepository.findAll(), HttpStatus.OK);
+		return new ResponseEntity<Iterable<Restaurant>>(allRestaurants, HttpStatus.OK);
 	}
 	
 	@RequestMapping(value="", method=RequestMethod.POST)
 	public ResponseEntity<Void> addRestaurant(@RequestBody Restaurant restaurant) {
 		System.out.println("POST /restaurants; " + restaurant);
-		System.out.println("Add new Restaurant: " + restaurant);
+				
 		Restaurant newRestaurant = restaurantRepository.save(restaurant);
 		System.out.println("SAVED RESTAURANT: " + newRestaurant);
 		
@@ -48,23 +47,49 @@ public class RestaurantService {
 		System.out.println("NEW RESTAURANT URI: " + newRestaurantUri);
 		responseHeaders.setLocation(newRestaurantUri);
 		
-		return new ResponseEntity<Void>(null, responseHeaders, HttpStatus.CREATED);
+		return new ResponseEntity<Void>(responseHeaders, HttpStatus.CREATED);
 		//return new ResponseEntity<>(null, HttpStatus.CREATED);
 	}
 		
 	@RequestMapping(value="/{restaurantId}", method=RequestMethod.GET)
 	public ResponseEntity<?> getRestaurant(@PathVariable Long restaurantId) {
 		System.out.println("GET /restaurants/" + restaurantId);
-		Restaurant r = restaurantRepository.findOne(restaurantId);
-		System.out.println("RESULT: " + r);
-		return new ResponseEntity<>(r, HttpStatus.OK);
+		Restaurant restaurant = restaurantRepository.findOne(restaurantId);
+		System.out.println("RESULT: " + restaurant);
+		return new ResponseEntity<>(restaurant, HttpStatus.OK);
 	}
 	
-	public void addDishToRestourant() {
+	@RequestMapping(value="/{restaurantId}", method=RequestMethod.PUT)
+	public ResponseEntity<Restaurant> updateRestaurant(@PathVariable Long restaurantId, @RequestBody Restaurant restaurant) {
+		System.out.println("PUT /restaurants/" + restaurantId);
+		
+		Restaurant currentRestaurant = restaurantRepository.findOne(restaurantId);
+        
+        if (null == currentRestaurant) {
+            System.out.println("Restaurant with id " + restaurantId + " not found!");
+            return new ResponseEntity<Restaurant>(HttpStatus.NOT_FOUND);
+        }
+        
+        currentRestaurant.setName(restaurant.getName());
+        currentRestaurant.setDishes(restaurant.getDishes());
+        
+        // Save the entity
+		restaurantRepository.save(currentRestaurant);
+		return new ResponseEntity<Restaurant>(currentRestaurant, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value="/{restaurantId}", method=RequestMethod.DELETE)
+	public ResponseEntity<?> deleteRestaurant(@PathVariable Long restaurantId) {
+		System.out.println("DELETE /restaurants/" + restaurantId);
+		restaurantRepository.delete(restaurantId);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+	
+	public void addDishToRestaurant() {
 		
 	}
 	
-	public void voteRestourant() {
+	public void voteRestaurant() {
 		
 	}
 	

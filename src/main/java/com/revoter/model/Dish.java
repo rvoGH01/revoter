@@ -1,16 +1,21 @@
 package com.revoter.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="dish")
-public class Dish {
+public class Dish implements Serializable {
+	private static final long serialVersionUID = 3637392225067938936L;
+
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="dish_id")
 	private long id;
 	
