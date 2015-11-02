@@ -4,6 +4,8 @@ import java.net.URI;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -18,6 +20,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.revoter.model.Dish;
 import com.revoter.model.Restaurant;
+import com.revoter.rest.exception.ResourceNotFoundException;
 import com.revoter.rest.repository.RestaurantRepository;
 
 @RestController
@@ -34,8 +37,21 @@ public class RestaurantController {
 		return new ResponseEntity<Iterable<Restaurant>>(allRestaurants, HttpStatus.OK);
 	}
 	
+	@RequestMapping(value="/{restaurantId}", method=RequestMethod.GET)
+	public ResponseEntity<?> getRestaurant(@PathVariable Long restaurantId) {
+		System.out.println("GET /restaurants/" + restaurantId);
+		Restaurant restaurant = restaurantRepository.findOne(restaurantId);
+		System.out.println("RESULT: " + restaurant);
+		
+		if (null == restaurant) {
+			throw new ResourceNotFoundException("Restaurant with id " + restaurantId + " not found!");
+		}
+		
+		return new ResponseEntity<>(restaurant, HttpStatus.OK);
+	}
+	
 	@RequestMapping(value="", method=RequestMethod.POST)
-	public ResponseEntity<Void> addRestaurant(@RequestBody Restaurant restaurant) {
+	public ResponseEntity<Void> addRestaurant(@Valid @RequestBody Restaurant restaurant) {
 		System.out.println("POST /restaurants; " + restaurant);
 				
 		Restaurant newRestaurant = restaurantRepository.save(restaurant);
@@ -43,32 +59,23 @@ public class RestaurantController {
 		
 		// Set the location header for the newly created resource
 		HttpHeaders responseHeaders = new HttpHeaders();
-		URI newRestaurantUri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(restaurant.getId()).toUri();
+		URI newRestaurantUri = getNewResourceUri(restaurant.getId());
 		System.out.println("NEW RESTAURANT URI: " + newRestaurantUri);
 		responseHeaders.setLocation(newRestaurantUri);
 		
 		return new ResponseEntity<Void>(responseHeaders, HttpStatus.CREATED);
-		//return new ResponseEntity<>(null, HttpStatus.CREATED);
-	}
-		
-	@RequestMapping(value="/{restaurantId}", method=RequestMethod.GET)
-	public ResponseEntity<?> getRestaurant(@PathVariable Long restaurantId) {
-		System.out.println("GET /restaurants/" + restaurantId);
-		Restaurant restaurant = restaurantRepository.findOne(restaurantId);
-		System.out.println("RESULT: " + restaurant);
-		return new ResponseEntity<>(restaurant, HttpStatus.OK);
 	}
 	
 	@RequestMapping(value="/{restaurantId}", method=RequestMethod.PUT)
-	public ResponseEntity<Restaurant> updateRestaurant(@PathVariable Long restaurantId, @RequestBody Restaurant restaurant) {
+	public ResponseEntity<Restaurant> updateRestaurant(@PathVariable Long restaurantId, @Valid @RequestBody Restaurant restaurant) {
 		System.out.println("PUT /restaurants/" + restaurantId);
 		
 		Restaurant currentRestaurant = restaurantRepository.findOne(restaurantId);
         
-        if (null == currentRestaurant) {
-            System.out.println("Restaurant with id " + restaurantId + " not found!");
-            return new ResponseEntity<Restaurant>(HttpStatus.NOT_FOUND);
-        }
+		if (null == currentRestaurant) {
+			System.out.println("Restaurant with id " + restaurantId + " not found!");
+			throw new ResourceNotFoundException("Restaurant with id " + restaurantId + " not found!");
+		}
         
         currentRestaurant.setName(restaurant.getName());
         currentRestaurant.setDishes(restaurant.getDishes());
@@ -81,18 +88,26 @@ public class RestaurantController {
 	@RequestMapping(value="/{restaurantId}", method=RequestMethod.DELETE)
 	public ResponseEntity<?> deleteRestaurant(@PathVariable Long restaurantId) {
 		System.out.println("DELETE /restaurants/" + restaurantId);
+		
+		Restaurant restaurant = restaurantRepository.findOne(restaurantId);
+		if (null == restaurant) {
+			throw new ResourceNotFoundException("Restaurant with id " + restaurantId + " not found!");
+		}
+		
 		restaurantRepository.delete(restaurantId);
 		return new ResponseEntity<>(HttpStatus.OK);
-	}
-	
-	public void addDishToRestaurant() {
-		
 	}
 	
 	public void voteRestaurant() {
 		
 	}
 	
+	private URI getNewResourceUri(Long resourceId) {
+		return ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(resourceId).toUri();
+	}
+	
+	
+	////
 	
 	@RequestMapping(value = "/test", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Restaurant> getRestaurant() {

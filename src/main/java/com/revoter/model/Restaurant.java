@@ -14,6 +14,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name="restaurant")
@@ -25,9 +30,11 @@ public class Restaurant implements Serializable {
 	@Column(name="restaurant_id")
 	private long id;
 	
+	@NotEmpty
 	@Column(name="name")
 	private String name;
 	
+	@Size(min=2, max=5)
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinColumn(name="restaurant_id")
 	@OrderBy
