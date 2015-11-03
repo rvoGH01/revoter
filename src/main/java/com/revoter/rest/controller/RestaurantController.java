@@ -38,7 +38,7 @@ public class RestaurantController {
 	}
 	
 	@RequestMapping(value="/{restaurantId}", method=RequestMethod.GET)
-	public ResponseEntity<?> getRestaurant(@PathVariable Long restaurantId) {
+	public ResponseEntity<Restaurant> getRestaurant(@PathVariable Long restaurantId) {
 		System.out.println("GET /restaurants/" + restaurantId);
 		Restaurant restaurant = restaurantRepository.findOne(restaurantId);
 		System.out.println("RESULT: " + restaurant);
@@ -47,7 +47,7 @@ public class RestaurantController {
 			throw new ResourceNotFoundException("Restaurant with id " + restaurantId + " not found!");
 		}
 		
-		return new ResponseEntity<>(restaurant, HttpStatus.OK);
+		return new ResponseEntity<Restaurant>(restaurant, HttpStatus.OK);
 	}
 	
 	@RequestMapping(value="", method=RequestMethod.POST)
@@ -86,7 +86,7 @@ public class RestaurantController {
 	}
 	
 	@RequestMapping(value="/{restaurantId}", method=RequestMethod.DELETE)
-	public ResponseEntity<?> deleteRestaurant(@PathVariable Long restaurantId) {
+	public ResponseEntity<Void> deleteRestaurant(@PathVariable Long restaurantId) {
 		System.out.println("DELETE /restaurants/" + restaurantId);
 		
 		Restaurant restaurant = restaurantRepository.findOne(restaurantId);
@@ -95,7 +95,7 @@ public class RestaurantController {
 		}
 		
 		restaurantRepository.delete(restaurantId);
-		return new ResponseEntity<>(HttpStatus.OK);
+		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 	
 	public void voteRestaurant() {

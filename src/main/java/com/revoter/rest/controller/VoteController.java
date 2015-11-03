@@ -11,13 +11,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.revoter.model.Vote;
 import com.revoter.rest.repository.VoteRepository;
 
 @RestController
-public class VoteController {
+public class VoteController extends AbstractRestController {
 
 	@Autowired
 	private VoteRepository voteRepository;
@@ -30,9 +29,9 @@ public class VoteController {
 		
 		// Set the location header for the newly created resource
 		HttpHeaders responseHeaders = new HttpHeaders();
-		URI newRestaurantUri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(vote.getId()).toUri();
-		System.out.println("NEW VOTE URI: " + newRestaurantUri);
-		responseHeaders.setLocation(newRestaurantUri);
+		URI newVoteUri = getNewResourceUri(vote.getId());
+		System.out.println("NEW VOTE URI: " + newVoteUri);
+		responseHeaders.setLocation(newVoteUri);
 		
 		return new ResponseEntity<Void>(responseHeaders, HttpStatus.CREATED);
 	}
