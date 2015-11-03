@@ -11,6 +11,7 @@ import com.revoter.model.Vote;
  */
 @Repository
 public interface VoteRepository extends CrudRepository<Vote, Long> {
-	@Query(value="select v.* from Dish d, Vote v where d.restaurant_id = ?1 and v.dish_id = d.dish_id", nativeQuery = true)
+	// select v.* from Vote v where v.restaurant_id = ?1
+	@Query(value="select v.* from Restaurant r, Vote v where r.restaurant_id = ?1 and v.restaurant_id = r.restaurant_id", nativeQuery = true)
 	public Iterable<Vote> findByRestaurant(Long restaurantId);
 }

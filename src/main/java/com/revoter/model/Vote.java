@@ -22,8 +22,8 @@ public class Vote implements Serializable {
 	private long id;
 	
 	@ManyToOne
-	@JoinColumn(name="dish_id")
-	private Dish dish;
+	@JoinColumn(name="restaurant_id")
+	private Restaurant restaurant;
 
 	public long getId() {
 		return id;
@@ -33,16 +33,16 @@ public class Vote implements Serializable {
 		this.id = id;
 	}
 
-	public Dish getDish() {
-		return dish;
+	public Restaurant getRestaurant() {
+		return restaurant;
 	}
 
-	public void setDish(Dish dish) {
-		this.dish = dish;
+	public void setRestaurant(Restaurant restaurant) {
+		this.restaurant = restaurant;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "Vote[id=" + id + ", " + dish.toString();
+		return "Vote[id=" + id + ", " + restaurant.toString();
 	}
 }

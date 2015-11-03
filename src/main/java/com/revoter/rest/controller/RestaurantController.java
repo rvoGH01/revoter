@@ -1,31 +1,26 @@
 package com.revoter.rest.controller;
 
 import java.net.URI;
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.revoter.model.Dish;
 import com.revoter.model.Restaurant;
 import com.revoter.rest.exception.ResourceNotFoundException;
 import com.revoter.rest.repository.RestaurantRepository;
 
 @RestController
 @RequestMapping("/restaurants")
-public class RestaurantController {
+public class RestaurantController extends AbstractRestController {
 	
 	@Autowired
 	private RestaurantRepository restaurantRepository;
@@ -97,51 +92,4 @@ public class RestaurantController {
 		restaurantRepository.delete(restaurantId);
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
-	
-	public void voteRestaurant() {
-		
-	}
-	
-	private URI getNewResourceUri(Long resourceId) {
-		return ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(resourceId).toUri();
-	}
-	
-	
-	////
-	
-	@RequestMapping(value = "/test", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Restaurant> getRestaurant() {
-        Restaurant r = new Restaurant();
-        r.setName("Maestro");
-        
-        Set<Dish> dishes = new HashSet<Dish>();
-        Dish d1 = new Dish();
-        d1.setName("Soup");
-        d1.setPrice(12.35f);
-        dishes.add(d1);
-        
-        Dish d2 = new Dish();
-        d2.setName("Salad");
-        d2.setPrice(43.15f);
-        dishes.add(d2);
-        
-        r.setDishes(dishes);
-        
-		System.out.println("TEST RESTAURANT: " + r);
-		
-        //final Dish d = ((RestourantDaoImpl) restourantDao).getDish(id);
-        return new ResponseEntity<Restaurant>(r, HttpStatus.OK);
-    }
-//	
-//	@RequestMapping(value = "/{name}", method = RequestMethod.GET)  
-//	public String sayHello(@PathVariable String name) {  
-//		//final Dish d = ((RestourantDaoImpl) restourantDao).getDish(1);
-//		String result = "Greeting: " + name;    
-//		return result;  
-//	}
-	
-	@RequestMapping(value = "/{msg}")
-    public String greeting(@PathVariable("msg") String msg) {
-        return "Message is: " + msg;
-    }
 }
