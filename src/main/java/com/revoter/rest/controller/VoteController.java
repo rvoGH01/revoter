@@ -22,7 +22,7 @@ import com.revoter.rest.repository.VoteRepository;
 
 @RestController
 public class VoteController extends AbstractRestController {
-
+	private static final int LAST_CHANCE_TO_VOTE = 11; // 11:00 AM
 	@Autowired
 	private VoteRepository voteRepository;
 	@Autowired
@@ -62,12 +62,12 @@ public class VoteController extends AbstractRestController {
 			System.out.println("CURR HOUR: " + hour);
 			
 			// update vote if it is before 11:00
-			if (hour < 11) {
+			if (hour < LAST_CHANCE_TO_VOTE) {
 				dbVote.setRestaurant(vote.getRestaurant());
 				// dbVote.setUser(vote.getUser()); // is it required??
 				voteRepository.save(dbVote);
 			} else {
-				System.out.println("It is too late, vote cannot be changed!");
+				System.out.println("It is too late to change your mind. Voting is allowed up to " + LAST_CHANCE_TO_VOTE + "AM");
 			}
 			
 			return new ResponseEntity<Vote>(dbVote, HttpStatus.OK);
