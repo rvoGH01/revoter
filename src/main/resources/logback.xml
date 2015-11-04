@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<!-- Appenders -->
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    	<encoder>
+    	
+    		<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %class{36}.%M:%L - %msg%n</pattern>
+      		<!-- <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern> -->
+      		<!-- <Pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</Pattern> -->
+    	</encoder>
+  	</appender>
+  
+	<appender name="FILE" class="ch.qos.logback.core.FileAppender">
+		<file>${catalina.base}/logs/revoter.log</file>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %class{36}.%M:%L - %msg%n</pattern>
+  		</layout>
+	</appender>
+	 
+	<!-- 
+	<logger name="org.springframework" level="DEBUG" additivity="false">
+		<appender-ref ref="STDOUT" />
+	</logger>
+	--> 
+	 
+	<!-- Application Loggers -->
+	<logger name="com.revoter" level="DEBUG" additivity="false">
+		<appender-ref ref="FILE" />
+	</logger>
+	 
+	<!-- Root logger -->	  
+	<root level="ERROR">
+		<appender-ref ref="STDOUT" />
+    </root> 
+</configuration>
