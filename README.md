@@ -1,12 +1,12 @@
 revoter: REstaurant VOTE system
 
 TOOLS & TECHNOLOGIES USED
-#########################
+=========================
 Java 1.8, Eclipse, MySQL/HSQLDB, Spring 4, Spring Security 4, Maven 3.3, Tomcat 7, cURL
 
 
 HOW TO USE/TEST
-###############
+===============
 1. Get all the sources from "https://github.com/rvoGH01/revoter"
 2. Tune "src/main/resources/db.properties" in order to get valid DB connection
 3. Execute "mvn clean install" to build the project
@@ -15,7 +15,7 @@ HOW TO USE/TEST
 
 
 DATABASE DESCRIPTION
-####################
+====================
 Database contains the following tables: 
 restaurant(restaurant_id, name) - contains restaurant info;
 dish(dish_id, name, price, restaurant_id) - contains a dish info for a specific restaurant
@@ -24,18 +24,18 @@ users(user_id, admin, first_name, last_name, username, password) - contains user
 
 
 API OVERVIEW
-############
+============
 	
 Resource Endpoint                                     | HTTP method | Description
-=============================================================================================================
+..
 vote related actions
--------------------------------------------------------------------------------------------------------------
+..
 revoter/api/restourants/{restourantId}/votes          | GET         | Get all votes for restaurant
 revoter/api/restourants/{restourantId}/votes          | POST        | Create a new vote
 revoter/api/restourants/{restourantId}/votes/{voteId} | GET         | Get specific vote for restaurant
--------------------------------------------------------------------------------------------------------------
+..
 restaurant related actions
--------------------------------------------------------------------------------------------------------------
+..
 revoter/api/restourants                               | POST        | Create/Add a new restaurant
 revoter/api/restourants                               | GET         | Get all available restaurants
 revoter/api/restourants/{restourantId}                | GET         | Get specific restaurant
@@ -44,7 +44,7 @@ revoter/api/restourants/{restourantId}                | DELETE      | Delete res
 
 
 cURL TEST COMMANDS
-##################
+==================
 
 Get Restaurant(s)
 -----------------
