@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -24,6 +25,10 @@ public class Vote implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="restaurant_id")
 	private Restaurant restaurant;
+	
+	@OneToOne
+    @JoinColumn(name="user_id")
+	private User user;
 
 	public long getId() {
 		return id;
@@ -39,6 +44,14 @@ public class Vote implements Serializable {
 
 	public void setRestaurant(Restaurant restaurant) {
 		this.restaurant = restaurant;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	@Override

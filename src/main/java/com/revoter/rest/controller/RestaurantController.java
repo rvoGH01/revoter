@@ -15,15 +15,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revoter.model.Restaurant;
+import com.revoter.model.Vote;
 import com.revoter.rest.exception.ResourceNotFoundException;
 import com.revoter.rest.repository.RestaurantRepository;
+import com.revoter.rest.repository.VoteRepository;
 
 @RestController
-@RequestMapping("/restaurants")
+@RequestMapping("/api/restaurants")
 public class RestaurantController extends AbstractRestController {
 	
 	@Autowired
 	private RestaurantRepository restaurantRepository;
+	@Autowired
+	private VoteRepository voteRepository;
 	
 	@RequestMapping
 	public ResponseEntity<Iterable<Restaurant>> getAllRestaurants() {
@@ -87,6 +91,12 @@ public class RestaurantController extends AbstractRestController {
 		Restaurant restaurant = restaurantRepository.findOne(restaurantId);
 		if (null == restaurant) {
 			throw new ResourceNotFoundException("Restaurant with id " + restaurantId + " not found!");
+		}
+		
+		// in case some votes available for a restaurant then delete them first
+		Iterable<Vote> iterable = voteRepository.findByRestaurant(restaurantId);
+		if (iterable != null) {
+			voteRepository.delete(iterable);
 		}
 		
 		restaurantRepository.delete(restaurantId);
