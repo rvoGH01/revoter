@@ -1,7 +1,5 @@
 package com.revoter.model;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="users")
-public class User implements Serializable {
+public class User extends BaseType {
 	private static final long serialVersionUID = -4372211868888224182L;
 	
 	@Id
@@ -92,10 +90,5 @@ public class User implements Serializable {
 
 	public void setAdmin(boolean admin) {
 		this.admin = admin;
-	}
-	
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", username=" + username + "]";
 	}
 }

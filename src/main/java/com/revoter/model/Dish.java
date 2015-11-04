@@ -1,7 +1,5 @@
 package com.revoter.model;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,8 +9,8 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="dish")
-public class Dish implements Serializable {
-	private static final long serialVersionUID = 3637392225067938936L;
+public class Dish extends BaseType {
+	private static final long serialVersionUID = -3455506950983192342L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -47,12 +45,5 @@ public class Dish implements Serializable {
 
 	public void setPrice(float price) {
 		this.price = price;
-	}
-	
-	// TODO: implement 'equals', 'hashCode' and 'toString'
-	
-	@Override
-	public String toString() {
-		return "Dish [id=" + id + ", name=" + name + ", price=" + price + "]";
 	}
 }

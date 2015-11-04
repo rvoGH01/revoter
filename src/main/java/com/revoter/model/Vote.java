@@ -1,7 +1,5 @@
 package com.revoter.model;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,7 +12,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="vote")
-public class Vote implements Serializable {
+public class Vote extends BaseType {
 	private static final long serialVersionUID = -5259472291214419174L;
 
 	@Id
@@ -52,10 +50,5 @@ public class Vote implements Serializable {
 
 	public void setUser(User user) {
 		this.user = user;
-	}
-
-	@Override
-	public String toString() {
-		return "Vote[id=" + id + ", " + restaurant.toString();
 	}
 }

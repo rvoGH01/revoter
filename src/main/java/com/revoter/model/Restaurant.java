@@ -1,6 +1,5 @@
 package com.revoter.model;
 
-import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -20,7 +19,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name="restaurant")
-public class Restaurant implements Serializable {
+public class Restaurant extends BaseType {
 	private static final long serialVersionUID = 6362819538857399093L;
 
 	@Id
@@ -60,10 +59,5 @@ public class Restaurant implements Serializable {
 
 	public void setDishes(Set<Dish> dishes) {
 		this.dishes = dishes;
-	}
-	
-	@Override
-	public String toString() {
-		return "Restaurant [id=" + id + ", name=" + name + "]";
 	}
 }
