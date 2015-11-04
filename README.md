@@ -30,17 +30,17 @@ Resource Endpoint                                     | HTTP method | Descriptio
 ..
 vote related actions
 ..
-revoter/api/restourants/{restourantId}/votes          | GET         | Get all votes for restaurant
-revoter/api/restourants/{restourantId}/votes          | POST        | Create a new vote
-revoter/api/restourants/{restourantId}/votes/{voteId} | GET         | Get specific vote for restaurant
+    revoter/api/restourants/{restourantId}/votes          | GET         | Get all votes for restaurant
+    revoter/api/restourants/{restourantId}/votes          | POST        | Create a new vote
+    revoter/api/restourants/{restourantId}/votes/{voteId} | GET         | Get specific vote for restaurant
 ..
 restaurant related actions
 ..
-revoter/api/restourants                               | POST        | Create/Add a new restaurant
-revoter/api/restourants                               | GET         | Get all available restaurants
-revoter/api/restourants/{restourantId}                | GET         | Get specific restaurant
-revoter/api/restourants/{restourantId}                | PUT         | Update restaurant (add dish for a restaurant)
-revoter/api/restourants/{restourantId}                | DELETE      | Delete restaurant
+    revoter/api/restourants                               | POST        | Create/Add a new restaurant
+    revoter/api/restourants                               | GET         | Get all available restaurants
+    revoter/api/restourants/{restourantId}                | GET         | Get specific restaurant
+    revoter/api/restourants/{restourantId}                | PUT         | Update restaurant (add dish for a restaurant)
+    revoter/api/restourants/{restourantId}                | DELETE      | Delete restaurant
 
 
 cURL TEST COMMANDS
@@ -48,33 +48,33 @@ cURL TEST COMMANDS
 
 Get Restaurant(s)
 -----------------
-curl -v http://localhost:8899/revoter/api/restaurants
-curl -u user2:222 http://localhost:8899/revoter/api/restaurants
-curl -vu admin:admin http://localhost:8899/revoter/api/restaurants
+    curl -v http://localhost:8899/revoter/api/restaurants
+    curl -u user2:222 http://localhost:8899/revoter/api/restaurants
+    curl -vu admin:admin http://localhost:8899/revoter/api/restaurants
 
 Add Restaurant (1 dish only)
 ----------------------------
-curl -u admin:admin -X POST http://localhost:8899/revoter/api/restaurants -H "Content-Type:application/json" -d "{\"name\": \"Atlas\",\"dishes\":[{\"name\":\"Potato\",\"price\":45.50}]}"
+    curl -u admin:admin -X POST http://localhost:8899/revoter/api/restaurants -H "Content-Type:application/json" -d "{\"name\": \"Atlas\",\"dishes\":[{\"name\":\"Potato\",\"price\":45.50}]}"
 
 Add Restaurant (2 dishes)
 ----------------------------
-curl -v -X POST http://localhost:8899/revoter/api/restaurants -H "Content-Type:application/json" -d "{\"name\": \"Atlas\",\"dishes\":[{\"name\":\"Potato\",\"price\":45.50},{\"name\":\"Meat\",\"price\":24.25}]}"
-curl -u user3:333 -X POST http://localhost:8899/revoter/api/restaurants -H "Content-Type:application/json" -d "{\"name\": \"Atlas\",\"dishes\":[{\"name\":\"Potato\",\"price\":45.50},{\"name\":\"Meat\",\"price\":24.25}]}"
-curl -u admin:admin -X POST http://localhost:8899/revoter/api/restaurants -H "Content-Type:application/json" -d "{\"name\": \"Atlas\",\"dishes\":[{\"name\":\"Potato\",\"price\":45.50},{\"name\":\"Meat\",\"price\":24.25}]}"
+    curl -v -X POST http://localhost:8899/revoter/api/restaurants -H "Content-Type:application/json" -d "{\"name\": \"Atlas\",\"dishes\":[{\"name\":\"Potato\",\"price\":45.50},{\"name\":\"Meat\",\"price\":24.25}]}"
+    curl -u user3:333 -X POST http://localhost:8899/revoter/api/restaurants -H "Content-Type:application/json" -d "{\"name\": \"Atlas\",\"dishes\":[{\"name\":\"Potato\",\"price\":45.50},{\"name\":\"Meat\",\"price\":24.25}]}"
+    curl -u admin:admin -X POST http://localhost:8899/revoter/api/restaurants -H "Content-Type:application/json" -d "{\"name\": \"Atlas\",\"dishes\":[{\"name\":\"Potato\",\"price\":45.50},{\"name\":\"Meat\",\"price\":24.25}]}"
 
 Delete Restaurant
 -----------------
-curl -i -X DELETE http://localhost:8899/revoter/api/restaurants/1
-curl -i -u user1:111 -X DELETE http://localhost:8899/revoter/api/restaurants/1
-curl -i -u admin:admin -X DELETE http://localhost:8899/revoter/api/restaurants/1
+    curl -i -X DELETE http://localhost:8899/revoter/api/restaurants/1
+    curl -i -u user1:111 -X DELETE http://localhost:8899/revoter/api/restaurants/1
+    curl -i -u admin:admin -X DELETE http://localhost:8899/revoter/api/restaurants/1
 
 Vote Restaurant
 ---------------
-curl -u user3:333 -X POST http://localhost:8899/revoter/api/restaurants/1/votes -H "Content-Type:application/json" -d "{\"restaurant\": {\"id\": 1, \"name\": \"any\"}, \"user\": {\"id\":4, \"username\":\"user3\", \"password\":\"any\", \"firstName\":\"first3\", \"lastName\":\"last3\", \"admin\":\"false\"}}"
-curl -i -u admin:admin -X POST http://localhost:8899/revoter/api/restaurants/24/votes -H "Content-Type:application/json" -d "{\"restaurant\": {\"id\":24, \"name\": \"any\"}, \"user\": {\"id\":2, \"username\":\"admin\", \"password\":\"any\", \"firstName\":\"Admin\", \"lastName\":\"Admin\", \"admin\":\"true\"}}"
+    curl -u user3:333 -X POST http://localhost:8899/revoter/api/restaurants/1/votes -H "Content-Type:application/json" -d "{\"restaurant\": {\"id\": 1, \"name\": \"any\"}, \"user\": {\"id\":4, \"username\":\"user3\", \"password\":\"any\", \"firstName\":\"first3\", \"lastName\":\"last3\", \"admin\":\"false\"}}"
+    curl -i -u admin:admin -X POST http://localhost:8899/revoter/api/restaurants/24/votes -H "Content-Type:application/json" -d "{\"restaurant\": {\"id\":24, \"name\": \"any\"}, \"user\": {\"id\":2, \"username\":\"admin\", \"password\":\"any\", \"firstName\":\"Admin\", \"lastName\":\"Admin\", \"admin\":\"true\"}}"
 
 Get Votes for Restaurant
 ------------------------
-curl -v http://localhost:8899/revoter/api/restaurants/1/votes
-curl -u user3:333 http://localhost:8899/revoter/api/restaurants/1/votes
-curl -vu admin:admin http://localhost:8899/revoter/api/restaurants/1/votes
+    curl -v http://localhost:8899/revoter/api/restaurants/1/votes
+    curl -u user3:333 http://localhost:8899/revoter/api/restaurants/1/votes
+    curl -vu admin:admin http://localhost:8899/revoter/api/restaurants/1/votes
