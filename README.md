@@ -48,23 +48,23 @@ cURL TEST COMMANDS
 
 Get Restaurant(s)
 -----------------
-curl -v http://localhost:8899/revoter/api/restaurants
+ curl -v http://localhost:8899/revoter/api/restaurants
 curl -u user2:222 http://localhost:8899/revoter/api/restaurants
 curl -vu admin:admin http://localhost:8899/revoter/api/restaurants
 
 Add Restaurant (1 dish only)
 ----------------------------
-curl -u admin:admin -X POST http://localhost:8899/revoter/api/restaurants -H "Content-Type:application/json" -d "{\"name\": \"Atlas\",\"dishes\":[{\"name\":\"Potato\",\"price\":45.50}]}"
+  curl -u admin:admin -X POST http://localhost:8899/revoter/api/restaurants -H "Content-Type:application/json" -d "{\"name\": \"Atlas\",\"dishes\":[{\"name\":\"Potato\",\"price\":45.50}]}"
 
 Add Restaurant (2 dishes)
 ----------------------------
-curl -v -X POST http://localhost:8899/revoter/api/restaurants -H "Content-Type:application/json" -d "{\"name\": \"Atlas\",\"dishes\":[{\"name\":\"Potato\",\"price\":45.50},{\"name\":\"Meat\",\"price\":24.25}]}"
+   curl -v -X POST http://localhost:8899/revoter/api/restaurants -H "Content-Type:application/json" -d "{\"name\": \"Atlas\",\"dishes\":[{\"name\":\"Potato\",\"price\":45.50},{\"name\":\"Meat\",\"price\":24.25}]}"
 curl -u user3:333 -X POST http://localhost:8899/revoter/api/restaurants -H "Content-Type:application/json" -d "{\"name\": \"Atlas\",\"dishes\":[{\"name\":\"Potato\",\"price\":45.50},{\"name\":\"Meat\",\"price\":24.25}]}"
 curl -u admin:admin -X POST http://localhost:8899/revoter/api/restaurants -H "Content-Type:application/json" -d "{\"name\": \"Atlas\",\"dishes\":[{\"name\":\"Potato\",\"price\":45.50},{\"name\":\"Meat\",\"price\":24.25}]}"
 
 Delete Restaurant
 -----------------
-curl -i -X DELETE http://localhost:8899/revoter/api/restaurants/1
+    curl -i -X DELETE http://localhost:8899/revoter/api/restaurants/1
 curl -i -u user1:111 -X DELETE http://localhost:8899/revoter/api/restaurants/1
 curl -i -u admin:admin -X DELETE http://localhost:8899/revoter/api/restaurants/1
 
