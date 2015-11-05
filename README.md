@@ -2,7 +2,7 @@ revoter: REstaurant VOTE system
 
 TOOLS & TECHNOLOGIES USED
 =========================
-Java 1.8, Eclipse, MySQL/HSQLDB, Spring 4, Spring Security 4, Maven 3.3, Tomcat 7, cURL
+Java 1.8, Eclipse, MySQL/HSQLDB, Spring 4, Spring Security 4, Maven 3.3, Tomcat 7, cURL, Slf4j
 
 
 HOW TO USE/TEST
@@ -27,20 +27,24 @@ API OVERVIEW
 ============
 	
 Resource Endpoint                                     | HTTP method | Description
-..
+
 vote related actions
-..
+
     revoter/api/restourants/{restourantId}/votes          | GET         | Get all votes for restaurant
     revoter/api/restourants/{restourantId}/votes          | POST        | Create a new vote
     revoter/api/restourants/{restourantId}/votes/{voteId} | GET         | Get specific vote for restaurant
-..
+
 restaurant related actions
-..
+
     revoter/api/restourants                               | POST        | Create/Add a new restaurant
     revoter/api/restourants                               | GET         | Get all available restaurants
     revoter/api/restourants/{restourantId}                | GET         | Get specific restaurant
     revoter/api/restourants/{restourantId}                | PUT         | Update restaurant (add dish for a restaurant)
     revoter/api/restourants/{restourantId}                | DELETE      | Delete restaurant
+
+get result
+
+    revoter/api/restaurants/computeresult                 | GET         | Get voting result
 
 
 cURL TEST COMMANDS
@@ -78,3 +82,7 @@ Get Votes for Restaurant
     curl -v http://localhost:8899/revoter/api/restaurants/1/votes
     curl -u user3:333 http://localhost:8899/revoter/api/restaurants/1/votes
     curl -vu admin:admin http://localhost:8899/revoter/api/restaurants/1/votes
+    
+Get voting result
+-----------------
+    curl -v http://localhost:8899/revoter/api/restaurants/computeresult
