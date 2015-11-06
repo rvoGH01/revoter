@@ -2,7 +2,7 @@ revoter: REstaurant VOTE system
 
 TOOLS & TECHNOLOGIES USED
 =========================
-Java 1.8, Eclipse, MySQL/HSQLDB, Spring 4, Spring Security 4, Maven 3.3, Tomcat 7, cURL, Slf4j
+Java 1.8, Eclipse, MySQL/HSQLDB, Spring 4, Spring Security 4, Maven 3.3, Tomcat 7, cURL, Slf4j, Swagger
 
 
 HOW TO USE/TEST
@@ -25,6 +25,10 @@ users(user_id, admin, first_name, last_name, username, password) - contains user
 
 API OVERVIEW
 ============
+
+Swagger
+-------
+    http://localhost:8899/revoter/swagger/index.html
 	
 Resource Endpoint                                     | HTTP method | Description
 
