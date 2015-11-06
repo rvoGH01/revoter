@@ -32,7 +32,7 @@ public class RestaurantController extends AbstractRestController {
 	@Autowired
 	private VoteRepository voteRepository;
 	
-	@RequestMapping
+	@RequestMapping(method=RequestMethod.GET)
 	public ResponseEntity<Iterable<Restaurant>> getAllRestaurants() {
 		LOGGER.info("GET /api/restaurants");
 		Iterable<Restaurant> allRestaurants = restaurantRepository.findAll();

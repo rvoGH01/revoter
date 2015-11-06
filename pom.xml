@@ -146,6 +146,13 @@
 			<version>${slf4j.jcl.version}</version>  
 		</dependency>
 		
+		<!-- Generates REST API documentation  -->
+		<dependency>
+			<groupId>com.mangofactory</groupId>
+			<artifactId>swagger-springmvc</artifactId>
+			<version>1.0.2</version>
+		</dependency>
+		
 		<!-- Testing -->
 		<dependency>
 			<groupId>junit</groupId>
