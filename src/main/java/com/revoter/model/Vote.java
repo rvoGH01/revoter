@@ -12,7 +12,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="vote")
-public class Vote extends BaseType {
+public class Vote extends BaseEntity {
 	private static final long serialVersionUID = -5259472291214419174L;
 
 	@Id

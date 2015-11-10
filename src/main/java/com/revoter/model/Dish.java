@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="dish")
-public class Dish extends BaseType {
+public class Dish extends BaseEntity {
 	private static final long serialVersionUID = -3455506950983192342L;
 
 	@Id

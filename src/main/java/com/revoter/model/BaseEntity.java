@@ -9,7 +9,7 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 /**
  * Base class containing implementation of base methods: equals(), hashCode(), toString(). 
  */
-public abstract class BaseType implements Serializable {
+public abstract class BaseEntity implements Serializable {
 	private static final long serialVersionUID = 1681883114910782073L;
 
 	@Override

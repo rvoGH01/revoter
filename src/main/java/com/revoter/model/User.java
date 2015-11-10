@@ -14,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="users")
-public class User extends BaseType {
+public class User extends BaseEntity {
 	private static final long serialVersionUID = -4372211868888224182L;
 	
 	@Id

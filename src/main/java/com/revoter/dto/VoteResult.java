@@ -2,9 +2,9 @@ package com.revoter.dto;
 
 import java.util.Collection;
 
-import com.revoter.model.BaseType;
+import com.revoter.model.BaseEntity;
 
-public class VoteResult extends BaseType {
+public class VoteResult extends BaseEntity {
 	private static final long serialVersionUID = 5268035605862755513L;
 	
 	private int totalVotes;

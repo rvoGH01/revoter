@@ -1,8 +1,8 @@
 package com.revoter.dto;
 
-import com.revoter.model.BaseType;
+import com.revoter.model.BaseEntity;
 
-public class VoteCount extends BaseType {
+public class VoteCount extends BaseEntity {
 	private static final long serialVersionUID = 6937439276055809388L;
 	
 	private long restaurantId;

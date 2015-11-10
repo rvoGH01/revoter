@@ -19,7 +19,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name="restaurant")
-public class Restaurant extends BaseType {
+public class Restaurant extends BaseEntity {
 	private static final long serialVersionUID = 6362819538857399093L;
 
 	@Id

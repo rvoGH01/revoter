@@ -2,7 +2,7 @@ revoter: REstaurant VOTE system
 
 TOOLS & TECHNOLOGIES USED
 =========================
-Java 1.8, Eclipse, MySQL/HSQLDB, Spring 4, Spring Security 4, Maven 3.3, Tomcat 7, cURL, Slf4j, Swagger
+Java 1.8, Eclipse, MySQL/HSQLDB, Hibernate/Hibernate Validation, Spring 4, Spring Security 4, Maven 3.3, Tomcat 7, cURL, Slf4j, Swagger
 
 
 HOW TO USE/TEST
